@@ -32,7 +32,7 @@ public class Main {
   public static void main(String[] args) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     mapper.registerModule(new JavaTimeModule());
-    String fileName = "/Users/italosantana/Desktop/Distilled/CSVStudies/src/main/java/org/example/parking.csv";
+    String fileName = "/Users/italosantana/Documents/studies/CSVStudies/src/main/java/org/example/parking.csv";
     var reader = new FileReader(fileName);
     List<ParkingData> items = new CsvToBeanBuilder(reader)
         .withType(ParkingData.class)
@@ -80,23 +80,22 @@ public class Main {
     @CsvBindByName(column = "id")
     private Long id;
 
-//    @CsvBindByName(column = "entry")
-//    @CsvDate(
-//        value = "dd-MM-yyyy HH:mm:ss Z",
-//        writeFormat = "dd-MM-yyyy HH:mm:ss Z",
-//        writeFormatEqualsReadFormat = false
-//    )
-    @CsvCustomBindByName(column = "entry", converter = LocalDateTimeConverter.class)
+    @CsvBindByName(column = "entry")
+    @CsvDate(
+        value = "dd/MM/yyyy HH:mm:ss Z",
+        writeFormat = "dd/MM/yyyy HH:mm:ss Z",
+        writeFormatEqualsReadFormat = false
+    )
+//    @CsvCustomBindByName(column = "entry", converter = LocalDateTimeConverter.class)
     private ZonedDateTime entry;
 
-
-//    @CsvBindByName(column = "exit")
-//    @CsvDate(
-//        value = "dd-MM-yyyy HH:mm:ss Z",
-//        writeFormat = "dd-MM-yyyy HH:mm:ss Z",
-//        writeFormatEqualsReadFormat = false
-//    )
-    @CsvCustomBindByName(column = "exit", converter = LocalDateTimeConverter.class)
+    @CsvBindByName(column = "exit")
+    @CsvDate(
+        value = "dd/MM/yyyy HH:mm:ss Z",
+        writeFormat = "dd/MM/yyyy HH:mm:ss Z",
+        writeFormatEqualsReadFormat = false
+    )
+//    @CsvCustomBindByName(column = "exit", converter = LocalDateTimeConverter.class)
     private ZonedDateTime exit;
 
     @CsvBindByName(column = "total_price")
@@ -107,7 +106,6 @@ public class Main {
 
     @CsvBindByName(column = "site")
     private String site;
-
   }
 
   public static class LocalDateTimeConverter extends AbstractBeanField {
